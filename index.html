@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Son Ödeme - Gizlilik Politikası</title>
+    <meta name="description" content="Son Ödeme Android uygulaması için Gizlilik Politikası. Veri güvenliği, yerel saklama ve kullanıcı hakları hakkında şeffaf bilgilendirme.">
+    <style>
+        :root {
+            --primary: #6366F1;
+            --accent: #22D3EE;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --background: #F8FAFC;
+            --surface: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --border: #E2E8F0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--background);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 40px;
+            background: linear-gradient(to bottom, #FFFFFF, var(--background));
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .logo-svg {
+            width: 64px;
+            height: 64px;
+            color: var(--primary);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            letter-spacing: -0.025em;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Highlights / Badges */
+        .highlights {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 600px) {
+            .highlights {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .highlight-card {
+            background: var(--surface);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .highlight-icon {
+            margin-right: 16px;
+            color: var(--success);
+            flex-shrink: 0;
+        }
+
+        .highlight-content h3 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+            color: var(--text-main);
+        }
+
+        .highlight-content p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Content Sections */
+        section {
+            background: var(--surface);
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            margin-bottom: 24px;
+            border: 1px solid var(--border);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--background);
+            display: flex;
+            align-items: center;
+        }
+
+        .section-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            opacity: 0.9;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            margin: 20px 0 10px 0;
+            color: var(--text-main);
+        }
+
+        p {
+            margin-bottom: 16px;
+        }
+
+        ul {
+            list-style-position: inside;
+            margin-bottom: 16px;
+            padding-left: 8px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        /* Permissions Box */
+        .permissions-box {
+            display: grid;
+            gap: 12px;
+        }
+
+        .perm-item {
+            display: flex;
+            align-items: center;
+            background: var(--background);
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .perm-icon {
+            margin-right: 12px;
+            color: var(--text-muted);
+        }
+
+        .perm-text {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Utils */
+        .text-sm { font-size: 0.875rem; }
+        .text-center { text-align: center; }
+        .font-bold { font-weight: 700; }
+        .block { display: block; }
+        .mb-4 { margin-bottom: 1rem; }
+        
+        .alert-info {
+            background-color: #EFF6FF;
+            border-left: 4px solid var(--primary);
+            padding: 16px;
+            border-radius: 4px;
+            color: #1E3A8A;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+
+        .alert-warning {
+            background-color: #FFFBEB;
+            border-left: 4px solid var(--warning);
+            padding: 16px;
+            border-radius: 4px;
+            color: #92400E;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <!-- SVG Logo: Takvim + Check -->
+                <svg class="logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                    <path d="M9 16l2 2 4-4"></path> <!-- Check mark -->
+                </svg>
+            </div>
+            <h1>Son Ödeme</h1>
+            <div class="subtitle">Gizlilik Politikası</div>
+            <div class="text-sm" style="margin-top: 10px; color: var(--text-muted);">Son Güncelleme: 17 Ocak 2026</div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Highlights Row -->
+        <div class="highlights">
+            <!-- Varsayılan Offline -->
+            <div class="highlight-card">
+                <div class="highlight-icon">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 1l22 22"></path>
+                        <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+                        <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+                        <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+                        <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+                        <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                        <line x1="12" y1="20" x2="12" y2="20"></line>
+                    </svg>
+                </div>
+                <div class="highlight-content">
+                    <h3>Varsayılan: Offline</h3>
+                    <p>Uygulama, verilerinizi varsayılan olarak cihazınızın yerel hafızasında saklar. İnternet bağlantısı sadece gerekli olduğunda (örn. döviz kuru) kullanılır.</p>
+                </div>
+            </div>
+
+            <!-- Veri İşleme -->
+            <div class="highlight-card">
+                <div class="highlight-icon" style="color: var(--primary);">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                </div>
+                <div class="highlight-content">
+                    <h3>Şeffaf & Temkinli</h3>
+                    <p>Finansal verileriniz bizim sunucularımıza gönderilmez veya saklanmaz. Verilerinizin kontrolü tamamen sizdedir.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1. Genel Bakış -->
+        <section>
+            <h2>1. Genel Bakış</h2>
+            <p><strong>Son Ödeme</strong> ("Uygulama"), kişisel finansal yönetim, fatura ve gelir takibi amacıyla geliştirilmiş bir mobil uygulamadır. Bu Gizlilik Politikası, uygulamamızı kullandığınızda verilerinizin nasıl işlendiğini açıklar.</p>
+            <p>Geliştirici <strong>Sinan Canpolat</strong> olarak, kullanıcı gizliliğine en üst düzeyde önem veriyorum. Uygulama, "önce gizlilik" prensibiyle tasarlanmıştır ve verilerinizi sizin kontrolünüz dışında paylaşmaz.</p>
+        </section>
+
+        <!-- 2. Veri Toplama ve Kullanımı -->
+        <section>
+            <h2>2. Hangi Verileri Topluyoruz?</h2>
+            <div class="alert-info">
+                Özetle: Kişisel kimlik bilgileriniz (TCK, tam adres vb.) toplanmaz. Girdiğiniz finansal veriler cihazınızda işlenir.
+            </div>
+            
+            <h3>2.1. Kullanıcı Tarafından Girilen Veriler</h3>
+            <p>Uygulama içerisinde kendi isteğinizle girdiğiniz fatura dökümleri, gelir bilgileri, varlık tutarları ve ödeme tarihleri <strong>cihazınızın dahili hafızasında</strong> şifrelenmiş veya güvenli veritabanı formatında (.db) saklanır.</p>
+
+            <h3>2.2. Otomatik Toplanan Veriler</h3>
+            <p>Şu an itibarıyla uygulama, kişiselleştirilmiş reklam veya pazarlama amaçlı üçüncü taraf izleyiciler (trackers) içermemektedir. Uygulama çökme raporları (Crashlytics) veya temel kullanım istatistikleri, sadece uygulamanın kararlılığını artırmak amacıyla Google Play Services altyapısı üzerinden anonim olarak toplanabilir.</p>
+        </section>
+
+        <!-- 3. Veri Saklama ve Güvenlik -->
+        <section>
+            <h2>3. Veriler Nerede Saklanır?</h2>
+            <p>Girdiğiniz tüm finansal veriler, Android işletim sisteminin <strong>Sandbox</strong> yapısı içerisinde, uygulamanın kendi özel veri alanında saklanır. Bu alana başka uygulamaların erişimi, işletim sistemi tarafından kısıtlanmıştır.</p>
+            
+            <p><strong>Önemli:</strong> Uygulamamızın kendi bulut sunucusu (backend) bulunmamaktadır. Dolayısıyla verileriniz bizim sunucularımıza yüklenmez. Uygulamayı silerseniz veya cihazınızın verilerini temizlerseniz, yedek almadıysanız verileriniz kaybolabilir.</p>
+
+            <div class="alert-warning">
+                <strong>Yedekleme:</strong> Uygulama içinde "Yedekle" özelliğini kullanarak verilerinizin bir kopyasını (JSON formatında) kendi cihazınıza veya kendi Google Drive alanınıza kaydedebilirsiniz. Bu dosyanın güvenliği kullanıcının sorumluluğundadır.
+            </div>
+        </section>
+
+        <!-- 4. İzinler ve Amaçları -->
+        <section>
+            <h2>4. İzinler ve Amaçları</h2>
+            <p>Uygulama, işlevlerini yerine getirebilmek için Android işletim sisteminden aşağıdaki izinleri talep edebilir:</p>
+            
+            <div class="permissions-box">
+                <!-- Bildirim -->
+                <div class="perm-item">
+                    <svg class="perm-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                    <div>
+                        <div class="perm-text">Bildirimler (POST_NOTIFICATIONS)</div>
+                        <div class="text-sm" style="color: var(--text-muted)">Ödeme günlerini, gecikmeleri ve haftalık özetleri size hatırlatmak için kullanılır.</div>
+                    </div>
+                </div>
+
+                <!-- Biyometrik -->
+                <div class="perm-item">
+                    <svg class="perm-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    <div>
+                        <div class="perm-text">Biyometrik Kilit (BIOMETRIC)</div>
+                        <div class="text-sm" style="color: var(--text-muted)">Uygulamaya girişi şifrelemek için (Parmak izi/Yüz). Biyometrik veriniz ASLA toplanmaz, doğrulama cihaz çipi tarafından yapılır.</div>
+                    </div>
+                </div>
+
+                <!-- Alarm -->
+                <div class="perm-item">
+                    <svg class="perm-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2 2"></path><path d="M5 3L2 6"></path><path d="M22 6l-3-3"></path></svg>
+                    <div>
+                        <div class="perm-text">Alarm ve Hatırlatıcılar</div>
+                        <div class="text-sm" style="color: var(--text-muted)">Ödeme zamanlarını tam saatinde planlamak için kullanılır.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Üçüncü Taraf Hizmetleri -->
+        <section>
+            <h2>5. Üçüncü Taraflar</h2>
+            <p>Uygulama, temel işlevsellik (örn. döviz kurlarını çekme) için güvenilir API servislerine salt-okunur (read-only) istekler gönderebilir. Bu istekler sırasında kişisel veriniz gönderilmez.</p>
+            <p>Reklam gösterimi amaçlı üçüncü taraf reklam ağları (örn. AdMob) <u>varsayılan olarak entegre edilmemiştir</u>. Gelecekte eklenmesi durumunda, bu politika güncellenecek ve uygulama içinde açık rızanız istenecektir.</p>
+        </section>
+
+        <!-- 6. Çocukların Gizliliği -->
+        <section>
+            <h2>6. Çocukların Gizliliği</h2>
+            <p>Uygulamamız özellikle 13 yaş altı çocuklara yönelik değildir. Çocuklardan bilerek kişisel veri toplamıyoruz. Ebeveynler, çocuklarının uygulamayı kullanması ve veri girişi yapması konusundaki sorumluluğu üstlenirler.</p>
+        </section>
+
+        <!-- 7. Veri Silme -->
+        <section>
+            <h2>7. Verilerinizi Nasıl Silebilirsiniz?</h2>
+            <p>Verilerinizi silmek için en hızlı yöntem, uygulamayı cihazınızdan kaldırmaktır (Uninstall). Bu işlem, Sandbox içinde tutulan veritabanını kalıcı olarak siler.</p>
+            <p>Ayrıca uygulama içerisinde <strong>Ayarlar > Veri</strong> menüsünden, uygulamayı silmeden sadece kayıtlı verileri temizleme seçeneği de (varsa) sunulmaktadır.</p>
+        </section>
+
+        <!-- 8. İletişim -->
+        <section>
+            <h2>8. İletişim</h2>
+            <p>Bu gizlilik politikasıyla ilgili sorularınız, önerileriniz veya endişeleriniz için bizimle iletişime geçebilirsiniz:</p>
+            <ul>
+                <li><strong>Geliştirici:</strong> Sinan Canpolat</li>
+                <li><strong>E-posta:</strong> <a href="mailto:infonetoapp@gmail.com">infonetoapp@gmail.com</a></li>
+            </ul>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Son Ödeme. Tüm Hakları Saklıdır.</p>
+            <p class="text-sm">Bu sayfa bilgilendirme amaçlıdır ve yasal tavsiye niteliği taşımaz.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
