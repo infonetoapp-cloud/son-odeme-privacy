@@ -1,392 +1,508 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Son Ödeme - Gizlilik Politikası</title>
-    <meta name="description" content="Son Ödeme Android uygulaması için Gizlilik Politikası. Veri güvenliği, yerel saklama ve kullanıcı hakları hakkında şeffaf bilgilendirme.">
     <style>
         :root {
-            --primary: #6366F1;
-            --accent: #22D3EE;
-            --success: #10B981;
-            --warning: #F59E0B;
-            --danger: #EF4444;
-            --background: #F8FAFC;
-            --surface: #FFFFFF;
-            --text-main: #0F172A;
-            --text-muted: #64748B;
-            --border: #E2E8F0;
+            --bg: #0f1117;
+            --card: #1a1d27;
+            --border: #2a2d3a;
+            --text: #e4e4e7;
+            --muted: #9ca3af;
+            --accent: #22d3ee;
+            --accent2: #06b6d4;
+            --warn: #fbbf24;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--background);
-            color: var(--text-main);
-            line-height: 1.6;
-            margin: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
             padding: 0;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Header */
-        header {
-            text-align: center;
-            padding: 40px 0;
+        .hero {
+            background: linear-gradient(135deg, #0f1117 0%, #1e293b 50%, #0f172a 100%);
             border-bottom: 1px solid var(--border);
-            margin-bottom: 40px;
-            background: linear-gradient(to bottom, #FFFFFF, var(--background));
+            padding: 3rem 1.5rem 2.5rem;
+            text-align: center;
         }
 
-        .logo-container {
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent), #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        .badges {
             display: flex;
+            gap: 0.75rem;
             justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-flex;
             align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .logo-svg {
-            width: 64px;
-            height: 64px;
-            color: var(--primary);
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--text-main);
-            margin-bottom: 8px;
-            letter-spacing: -0.025em;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            color: var(--text-muted);
+            gap: 0.4rem;
+            background: rgba(34, 211, 238, 0.08);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            color: var(--accent);
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
+            font-size: 0.82rem;
             font-weight: 500;
         }
 
-        /* Highlights / Badges */
-        .highlights {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 40px;
+        .container {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
         }
 
-        @media (max-width: 600px) {
-            .highlights {
-                grid-template-columns: 1fr;
-            }
+        .update-notice {
+            background: rgba(251, 191, 36, 0.08);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 2rem;
+            font-size: 0.88rem;
+            color: var(--warn);
         }
 
-        .highlight-card {
-            background: var(--surface);
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: flex-start;
-        }
-
-        .highlight-icon {
-            margin-right: 16px;
-            color: var(--success);
-            flex-shrink: 0;
-        }
-
-        .highlight-content h3 {
-            font-size: 1rem;
-            margin-bottom: 4px;
-            color: var(--text-main);
-        }
-
-        .highlight-content p {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
-
-        /* Content Sections */
         section {
-            background: var(--surface);
-            padding: 32px;
-            border-radius: 16px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            margin-bottom: 24px;
+            background: var(--card);
             border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            margin-bottom: 1.25rem;
         }
 
         h2 {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--background);
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--accent);
             display: flex;
             align-items: center;
-        }
-
-        .section-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 10px;
-            opacity: 0.9;
+            gap: 0.5rem;
         }
 
         h3 {
-            font-size: 1.1rem;
-            margin: 20px 0 10px 0;
-            color: var(--text-main);
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 1rem 0 0.5rem;
+            color: var(--text);
         }
 
-        p {
-            margin-bottom: 16px;
+        p,
+        li {
+            font-size: 0.92rem;
+            color: var(--muted);
         }
 
         ul {
-            list-style-position: inside;
-            margin-bottom: 16px;
-            padding-left: 8px;
+            padding-left: 1.25rem;
         }
 
         li {
-            margin-bottom: 8px;
-            color: var(--text-main);
+            margin-bottom: 0.35rem;
         }
 
-        /* Permissions Box */
-        .permissions-box {
-            display: grid;
-            gap: 12px;
+        strong {
+            color: var(--text);
+            font-weight: 600;
         }
 
-        .perm-item {
-            display: flex;
-            align-items: center;
-            background: var(--background);
-            padding: 12px;
-            border-radius: 8px;
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 1rem 0;
         }
 
-        .perm-icon {
-            margin-right: 12px;
-            color: var(--text-muted);
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
         }
 
-        .perm-text {
-            font-size: 0.9rem;
-            font-weight: 500;
+        th,
+        td {
+            padding: 0.65rem 0.85rem;
+            border: 1px solid var(--border);
+            text-align: left;
         }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            color: var(--text-muted);
-            font-size: 0.875rem;
-            border-top: 1px solid var(--border);
-            margin-top: 40px;
+        th {
+            background: rgba(34, 211, 238, 0.06);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        td {
+            color: var(--muted);
         }
 
         a {
-            color: var(--primary);
+            color: var(--accent);
             text-decoration: none;
-            font-weight: 500;
         }
 
         a:hover {
             text-decoration: underline;
         }
 
-        /* Utils */
-        .text-sm { font-size: 0.875rem; }
-        .text-center { text-align: center; }
-        .font-bold { font-weight: 700; }
-        .block { display: block; }
-        .mb-4 { margin-bottom: 1rem; }
-        
-        .alert-info {
-            background-color: #EFF6FF;
-            border-left: 4px solid var(--primary);
-            padding: 16px;
-            border-radius: 4px;
-            color: #1E3A8A;
-            font-size: 0.9rem;
-            margin-bottom: 16px;
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--muted);
+            font-size: 0.82rem;
+            border-top: 1px solid var(--border);
         }
 
-        .alert-warning {
-            background-color: #FFFBEB;
-            border-left: 4px solid var(--warning);
-            padding: 16px;
-            border-radius: 4px;
-            color: #92400E;
-            font-size: 0.9rem;
-            margin-bottom: 16px;
+        .mode-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .mode-card {
+            background: rgba(34, 211, 238, 0.04);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.15rem;
+        }
+
+        .mode-card h4 {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .mode-card p {
+            font-size: 0.84rem;
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .mode-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 1.25rem;
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <header>
-        <div class="container">
-            <div class="logo-container">
-                <!-- SVG Logo: Takvim + Check -->
-                <svg class="logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                    <line x1="16" y1="2" x2="16" y2="6"></line>
-                    <line x1="8" y1="2" x2="8" y2="6"></line>
-                    <line x1="3" y1="10" x2="21" y2="10"></line>
-                    <path d="M9 16l2 2 4-4"></path> <!-- Check mark -->
-                </svg>
-            </div>
-            <h1>Son Ödeme</h1>
-            <div class="subtitle">Gizlilik Politikası</div>
-            <div class="text-sm" style="margin-top: 10px; color: var(--text-muted);">Son Güncelleme: 17 Ocak 2026</div>
+    <div class="hero">
+        <h1>Son Ödeme</h1>
+        <p>Gizlilik Politikası</p>
+        <div class="badges">
+            <span class="badge">🔒 Önce Gizlilik</span>
+            <span class="badge">📱 Cihazda Saklama</span>
+            <span class="badge">☁️ Opsiyonel Bulut Senkronizasyonu</span>
         </div>
-    </header>
+    </div>
 
     <div class="container">
 
-        <!-- Highlights Row -->
-        <div class="highlights">
-            <!-- Varsayılan Offline -->
-            <div class="highlight-card">
-                <div class="highlight-icon">
-                    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M1 1l22 22"></path>
-                        <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
-                        <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
-                        <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
-                        <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
-                        <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
-                        <line x1="12" y1="20" x2="12" y2="20"></line>
-                    </svg>
-                </div>
-                <div class="highlight-content">
-                    <h3>Varsayılan: Offline</h3>
-                    <p>Uygulama, verilerinizi varsayılan olarak cihazınızın yerel hafızasında saklar. İnternet bağlantısı sadece gerekli olduğunda (örn. döviz kuru) kullanılır.</p>
-                </div>
-            </div>
-
-            <!-- Veri İşleme -->
-            <div class="highlight-card">
-                <div class="highlight-icon" style="color: var(--primary);">
-                    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                    </svg>
-                </div>
-                <div class="highlight-content">
-                    <h3>Şeffaf & Temkinli</h3>
-                    <p>Finansal verileriniz bizim sunucularımıza gönderilmez veya saklanmaz. Verilerinizin kontrolü tamamen sizdedir.</p>
-                </div>
-            </div>
+        <div class="update-notice">
+            ⚠️ <strong>Son güncelleme:</strong> 24 Şubat 2026 — Birlikte kullanım (Shared Mode), Google ile giriş, bulut
+            senkronizasyonu, bildirimler ve biyometrik kilit özellikleri eklendi.
         </div>
 
-        <!-- 1. Genel Bakış -->
+        <!-- 1. GENEL BAKIŞ -->
         <section>
             <h2>1. Genel Bakış</h2>
-            <p><strong>Son Ödeme</strong> ("Uygulama"), kişisel finansal yönetim, fatura ve gelir takibi amacıyla geliştirilmiş bir mobil uygulamadır. Bu Gizlilik Politikası, uygulamamızı kullandığınızda verilerinizin nasıl işlendiğini açıklar.</p>
-            <p>Geliştirici <strong>Sinan Canpolat</strong> olarak, kullanıcı gizliliğine en üst düzeyde önem veriyorum. Uygulama, "önce gizlilik" prensibiyle tasarlanmıştır ve verilerinizi sizin kontrolünüz dışında paylaşmaz.</p>
-        </section>
+            <p>Son Ödeme ("Uygulama"), kişisel ve ortak finansal yönetim, fatura takibi, gelir izleme ve varlık yönetimi
+                amacıyla geliştirilmiş bir Android uygulamasıdır.</p>
+            <p style="margin-top:0.5rem">Geliştirici <strong>Sinan Canpolat</strong> olarak, kullanıcı gizliliğine en
+                üst düzeyde önem veriyorum. Uygulama, <strong>"önce gizlilik"</strong> prensibiyle tasarlanmıştır.</p>
 
-        <!-- 2. Veri Toplama ve Kullanımı -->
-        <section>
-            <h2>2. Hangi Verileri Topluyoruz?</h2>
-            <div class="alert-info">
-                Özetle: Kişisel kimlik bilgileriniz (TCK, tam adres vb.) toplanmaz. Girdiğiniz finansal veriler cihazınızda işlenir.
+            <h3>Uygulama Modları</h3>
+            <div class="mode-grid">
+                <div class="mode-card">
+                    <h4>🏠 Solo Mod (Tek Başına)</h4>
+                    <p>Tüm veriler yalnızca cihazınızın yerel hafızasında (Room veritabanı) saklanır. İnternet
+                        bağlantısı gerekmez. Hiçbir veri buluta yüklenmez.</p>
+                </div>
+                <div class="mode-card">
+                    <h4>👥 Shared Mod (Birlikte)</h4>
+                    <p>Ev halkı üyeleriyle ortak fatura ve gelir takibi yapabilirsiniz. Paylaşılan veriler Google
+                        Firebase Firestore üzerinde güvenli şekilde saklanır.</p>
+                </div>
             </div>
-            
-            <h3>2.1. Kullanıcı Tarafından Girilen Veriler</h3>
-            <p>Uygulama içerisinde kendi isteğinizle girdiğiniz fatura dökümleri, gelir bilgileri, varlık tutarları ve ödeme tarihleri <strong>cihazınızın dahili hafızasında, Android işletim sisteminin sağladığı <strong>uygulamaya özel güvenli veri alanında (.db)</strong> saklanır.</p>
-
-            <h3>2.2. Otomatik Toplanan Veriler</h3>
-            <p>Şu an itibarıyla uygulama, kişiselleştirilmiş reklam veya pazarlama amaçlı üçüncü taraf izleyiciler (trackers) içermemektedir. Uygulama çökme raporları (Crashlytics) veya temel kullanım istatistikleri, sadece uygulamanın kararlılığını artırmak amacıyla Google Play Services altyapısı üzerinden anonim olarak toplanabilir.</p>
         </section>
 
-        <!-- 3. Veri Saklama ve Güvenlik -->
+        <!-- 2. TOPLANAN VERİLER -->
+        <section>
+            <h2>2. Toplanan Veriler</h2>
+
+            <h3>2.1 Kullanıcı Tarafından Girilen Veriler</h3>
+            <ul>
+                <li>Fatura bilgileri (isim, tutar, son ödeme tarihi, kategori)</li>
+                <li>Gelir bilgileri (kaynak, tutar, tahsil tarihi)</li>
+                <li>Varlık kayıtları (isim, kategori, tutar)</li>
+                <li>Ödeme geçmişi ve tahsilat kayıtları</li>
+                <li>Kullanıcı adı (onboarding sırasında girilen)</li>
+            </ul>
+
+            <h3>2.2 Google ile Giriş (Shared Mod)</h3>
+            <p>Birlikte kullanım modunu seçerseniz Google hesabınızla giriş yaparsınız. Bu durumda aşağıdaki bilgiler
+                alınır:</p>
+            <ul>
+                <li><strong>Google Kullanıcı ID (UID):</strong> Hesabınızı tanımlamak için</li>
+                <li><strong>E-posta adresi:</strong> Ev halkı üyelerini eşleştirmek için</li>
+                <li><strong>Görüntülenen ad:</strong> Diğer üyelere kim olduğunuzu göstermek için</li>
+            </ul>
+            <p style="margin-top:0.5rem"><strong>Solo modda</strong> Google ile giriş gerekmez ve bu bilgiler toplanmaz.
+            </p>
+
+            <h3>2.3 Otomatik Toplanan Veriler</h3>
+            <ul>
+                <li><strong>Firebase Analytics:</strong> Anonim kullanım istatistikleri (ekran görüntüleme, özellik
+                    kullanımı). Kişisel finansal verileriniz bu kapsamda gönderilmez.</li>
+                <li><strong>Crash raporları:</strong> Uygulama çökmelerinde anonim teknik bilgi (cihaz modeli, Android
+                    sürümü)</li>
+            </ul>
+        </section>
+
+        <!-- 3. VERİ DEPOLAMA -->
         <section>
             <h2>3. Veriler Nerede Saklanır?</h2>
-            <p>Girdiğiniz tüm finansal veriler, Android işletim sisteminin <strong>Sandbox</strong> yapısı içerisinde, uygulamanın kendi özel veri alanında saklanır. Bu alana başka uygulamaların erişimi, işletim sistemi tarafından kısıtlanmıştır.</p>
-            
-            <p><strong>Önemli:</strong> Uygulamamızın kendi bulut sunucusu (backend) bulunmamaktadır. Dolayısıyla verileriniz bizim sunucularımıza yüklenmez. Uygulamayı silerseniz veya cihazınızın verilerini temizlerseniz, yedek almadıysanız verileriniz kaybolabilir.</p>
 
-            <div class="alert-warning">
-                <strong>Yedekleme:</strong> Uygulama içinde "Yedekle" özelliğini kullanarak verilerinizin bir kopyasını (JSON formatında) kendi cihazınıza veya kendi Google Drive alanınıza kaydedebilirsiniz. Bu dosyanın güvenliği kullanıcının sorumluluğundadır.
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Veri Türü</th>
+                            <th>Solo Mod</th>
+                            <th>Shared Mod</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Faturalar, gelirler, varlıklar</td>
+                            <td>Cihazda (Room DB)</td>
+                            <td>Google Firestore</td>
+                        </tr>
+                        <tr>
+                            <td>Ödeme ve tahsilat geçmişi</td>
+                            <td>Cihazda (Room DB)</td>
+                            <td>Google Firestore</td>
+                        </tr>
+                        <tr>
+                            <td>Kullanıcı tercihleri (tema, bildirim)</td>
+                            <td>Cihazda (DataStore)</td>
+                            <td>Cihazda (DataStore)</td>
+                        </tr>
+                        <tr>
+                            <td>Hesap bilgileri (UID, e-posta)</td>
+                            <td>—</td>
+                            <td>Firebase Authentication</td>
+                        </tr>
+                        <tr>
+                            <td>Bildirim token'ı (FCM)</td>
+                            <td>—</td>
+                            <td>Google Firebase</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+
+            <h3>Yedekleme</h3>
+            <p>Uygulama, Android'in otomatik yedekleme sistemini kullanarak yerel veritabanınızı ve tercihlerinizi
+                Google Drive hesabınıza yedekleyebilir. Bu yedekleme, Android cihaz ayarlarınızdaki "Yedekle" seçeneğine
+                bağlıdır ve tamamen sizin kontrolünüzdedir.</p>
+
+            <h3>Firestore Güvenliği (Shared Mod)</h3>
+            <p>Bulutta saklanan ortak veriler, aşağıdaki güvenlik kurallarıyla korunur:</p>
+            <ul>
+                <li>Yalnızca ev halkı üyeleri kendi evlerinin verilerini okuyabilir ve yazabilir</li>
+                <li>Fatura, gelir, ödeme ve varlık verileri üyelik kontrolünden geçer</li>
+                <li>Bir kullanıcı yalnızca kendi profilini güncelleyebilir</li>
+                <li>Tüm iletişim HTTPS/TLS şifrelemesiyle korunur</li>
+            </ul>
         </section>
 
-        <!-- 4. İzinler ve Amaçları -->
+        <!-- 4. İZİNLER -->
         <section>
             <h2>4. İzinler ve Amaçları</h2>
-            <p>Uygulama, işlevlerini yerine getirebilmek için Android işletim sisteminden aşağıdaki izinleri talep edebilir:</p>
-            
-            <div class="permissions-box">
-                <!-- Bildirim -->
-                <div class="perm-item">
-                    <svg class="perm-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-                    <div>
-                        <div class="perm-text">Bildirimler (POST_NOTIFICATIONS)</div>
-                        <div class="text-sm" style="color: var(--text-muted)">Ödeme günlerini, gecikmeleri ve haftalık özetleri size hatırlatmak için kullanılır.</div>
-                    </div>
-                </div>
-
-                <!-- Biyometrik -->
-                <div class="perm-item">
-                    <svg class="perm-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                    <div>
-                        <div class="perm-text">Biyometrik Kilit (BIOMETRIC)</div>
-                        <div class="text-sm" style="color: var(--text-muted)">Uygulamaya girişi şifrelemek için (Parmak izi/Yüz). Biyometrik veriler uygulama tarafından toplanmaz veya saklanmaz; doğrulama Android işletim sistemi tarafından gerçekleştirilir.</div>
-                    </div>
-                </div>
-
-                <!-- Alarm -->
-                <div class="perm-item">
-                    <svg class="perm-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2 2"></path><path d="M5 3L2 6"></path><path d="M22 6l-3-3"></path></svg>
-                    <div>
-                        <div class="perm-text">Alarm ve Hatırlatıcılar</div>
-                        <div class="text-sm" style="color: var(--text-muted)">Ödeme zamanlarını tam saatinde planlamak için kullanılır.</div>
-                    </div>
-                </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>İzin</th>
+                            <th>Amaç</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>İnternet (INTERNET)</strong></td>
+                            <td>Döviz kurları, Firestore senkronizasyonu, Google ile giriş</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bildirimler (POST_NOTIFICATIONS)</strong></td>
+                            <td>Fatura hatırlatmaları ve gelir bildirimleri</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tam Alarm (SCHEDULE_EXACT_ALARM)</strong></td>
+                            <td>Zamanında hatırlatma bildirimi gönderme</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Açılış Alıcısı (BOOT_COMPLETED)</strong></td>
+                            <td>Cihaz yeniden başladığında alarmları yeniden planlama</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Titreşim (VIBRATE)</strong></td>
+                            <td>Bildirimlerle birlikte titreşim</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Biyometrik (USE_BIOMETRIC)</strong></td>
+                            <td>Uygulama kilidi: Parmak izi / yüz tanıma ile giriş</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </section>
 
-        <!-- 5. Üçüncü Taraf Hizmetleri -->
+        <!-- 5. BİYOMETRİK -->
         <section>
-            <h2>5. Üçüncü Taraflar</h2>
-            <p>Uygulama, temel işlevsellik (örn. döviz kurlarını çekme) için güvenilir API servislerine salt-okunur (read-only) istekler gönderebilir. Bu istekler sırasında kişisel veriniz gönderilmez.</p>
-            <p>Reklam gösterimi amaçlı üçüncü taraf reklam ağları (örn. AdMob) <u>varsayılan olarak entegre edilmemiştir</u>. Gelecekte eklenmesi durumunda, bu politika güncellenecek ve uygulama içinde açık rızanız istenecektir.</p>
+            <h2>5. Biyometrik Kimlik Doğrulama</h2>
+            <p>Uygulama, isteğe bağlı olarak biyometrik kilit (parmak izi / yüz tanıma) özelliği sunar. Bu özellik:</p>
+            <ul>
+                <li>Android'in yerleşik <strong>BiometricPrompt API</strong>'sini kullanır</li>
+                <li>Biyometrik verileriniz (parmak izi, yüz verisi) <strong>bizim tarafımızdan saklanmaz</strong></li>
+                <li>Tüm biyometrik işlem cihazın güvenli donanım modülü (TEE/SE) üzerinde gerçekleşir</li>
+                <li>Uygulama yalnızca "doğrulama başarılı/başarısız" sonucunu alır</li>
+            </ul>
         </section>
 
-        <!-- 6. Çocukların Gizliliği -->
+        <!-- 6. BİLDİRİMLER -->
         <section>
-            <h2>6. Çocukların Gizliliği</h2>
-            <p>Uygulamamız özellikle 13 yaş altı çocuklara yönelik değildir. Çocuklardan bilerek kişisel veri toplamıyoruz. Ebeveynler, çocuklarının uygulamayı kullanması ve veri girişi yapması konusundaki sorumluluğu üstlenirler.</p>
+            <h2>6. Bildirimler</h2>
+            <p>Uygulama, iki tür bildirim gönderebilir:</p>
+            <ul>
+                <li><strong>Yerel Bildirimler:</strong> Fatura son ödeme tarihi hatırlatmaları ve gelir tahsilat
+                    hatırlatmaları. Tamamen cihaz üzerinde çalışır.</li>
+                <li><strong>Push Bildirimler (Shared Mod):</strong> Firebase Cloud Messaging (FCM) üzerinden, ev halkı
+                    üyeleri arasında bildirim göndermek için kullanılır (örn: bir üye fatura ödediğinde).</li>
+            </ul>
+            <p style="margin-top:0.5rem">Bildirimleri Ayarlar menüsünden tamamen kapatabilir veya sessiz saatler
+                belirleyebilirsiniz.</p>
         </section>
 
-        <!-- 7. Veri Silme -->
+        <!-- 7. ÜÇÜNCÜ TARAFLAR -->
         <section>
-            <h2>7. Verilerinizi Nasıl Silebilirsiniz?</h2>
-            <p>Verilerinizi silmek için en hızlı yöntem, uygulamayı cihazınızdan kaldırmaktır (Uninstall). Bu işlem, Sandbox içinde tutulan veritabanını kalıcı olarak siler.</p>
-            <p>Ayrıca uygulama içerisinde <strong>Ayarlar > Veri</strong> menüsünden, uygulamayı silmeden sadece kayıtlı verileri temizleme seçeneği de (varsa) sunulmaktadır.</p>
+            <h2>7. Üçüncü Taraf Hizmetler</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Hizmet</th>
+                            <th>Amaç</th>
+                            <th>Gizlilik Politikası</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Google Firebase Authentication</td>
+                            <td>Kullanıcı kimlik doğrulama (Shared mod)</td>
+                            <td><a href="https://firebase.google.com/support/privacy" target="_blank">Firebase
+                                    Gizlilik</a></td>
+                        </tr>
+                        <tr>
+                            <td>Google Cloud Firestore</td>
+                            <td>Ortak veri senkronizasyonu (Shared mod)</td>
+                            <td><a href="https://cloud.google.com/terms/cloud-privacy-notice" target="_blank">Google
+                                    Cloud Gizlilik</a></td>
+                        </tr>
+                        <tr>
+                            <td>Firebase Analytics</td>
+                            <td>Anonim kullanım istatistikleri</td>
+                            <td><a href="https://firebase.google.com/support/privacy" target="_blank">Firebase
+                                    Gizlilik</a></td>
+                        </tr>
+                        <tr>
+                            <td>Firebase Cloud Messaging</td>
+                            <td>Push bildirimler (Shared mod)</td>
+                            <td><a href="https://firebase.google.com/support/privacy" target="_blank">Firebase
+                                    Gizlilik</a></td>
+                        </tr>
+                        <tr>
+                            <td>Döviz Kuru API</td>
+                            <td>Güncel kur bilgisi (salt-okunur)</td>
+                            <td>Kişisel veri gönderilmez</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>Uygulama reklam ağları (AdMob vb.) veya üçüncü taraf izleyiciler (trackers)
+                <strong>içermemektedir</strong>.</p>
         </section>
 
-        <!-- 8. İletişim -->
+        <!-- 8. ÇOCUKLAR -->
         <section>
-            <h2>8. İletişim</h2>
-            <p>Bu gizlilik politikasıyla ilgili sorularınız, önerileriniz veya endişeleriniz için bizimle iletişime geçebilirsiniz:</p>
+            <h2>8. Çocukların Gizliliği</h2>
+            <p>Uygulama, 13 yaş altı çocuklara yönelik değildir ve çocuklardan bilerek kişisel veri toplamaz.
+                Ebeveynler, çocuklarının uygulamayı kullanması konusundaki sorumluluğu üstlenirler.</p>
+        </section>
+
+        <!-- 9. SİLME -->
+        <section>
+            <h2>9. Verilerinizi Nasıl Silebilirsiniz?</h2>
+            <h3>Solo Mod</h3>
+            <ul>
+                <li>Uygulamayı cihazınızdan kaldırın → Tüm yerel veriler kalıcı olarak silinir</li>
+                <li>Android Ayarları → Uygulamalar → Son Ödeme → Veriyi Temizle</li>
+            </ul>
+            <h3>Shared Mod</h3>
+            <ul>
+                <li>Uygulamadan ev halkınızdan ayrılın → Paylaşılan verilerle ilişkiniz kesilir</li>
+                <li>Ev sahibiyseniz evi silebilirsiniz → Tüm ortak veriler kalıcı olarak silinir</li>
+                <li>Google hesabınızı silmek isterseniz: <a
+                        href="mailto:infonetoapp@gmail.com">infonetoapp@gmail.com</a> adresine başvurun</li>
+            </ul>
+        </section>
+
+        <!-- 10. GÜNCELLEMELER -->
+        <section>
+            <h2>10. Politika Güncellemeleri</h2>
+            <p>Bu gizlilik politikası, uygulamaya eklenen yeni özelliklerle birlikte güncellenebilir. Önemli
+                değişiklikler uygulama içi bildirimle duyurulacaktır. Güncel sürüm her zaman bu sayfada yayınlanır.</p>
+        </section>
+
+        <!-- 11. İLETİŞİM -->
+        <section>
+            <h2>11. İletişim</h2>
+            <p>Bu gizlilik politikasıyla ilgili sorularınız, önerileriniz veya veri silme talepleriniz için:</p>
             <ul>
                 <li><strong>Geliştirici:</strong> Sinan Canpolat</li>
                 <li><strong>E-posta:</strong> <a href="mailto:infonetoapp@gmail.com">infonetoapp@gmail.com</a></li>
@@ -395,12 +511,12 @@
 
     </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Son Ödeme. Tüm Hakları Saklıdır.</p>
-            <p class="text-sm">Bu sayfa bilgilendirme amaçlıdır ve yasal tavsiye niteliği taşımaz.</p>
-        </div>
-    </footer>
+    <div class="footer">
+        © 2026 Son Ödeme. Tüm Hakları Saklıdır.<br>
+        Bu sayfa bilgilendirme amaçlıdır ve yasal tavsiye niteliği taşımaz.<br>
+        Yürürlük tarihi: 24 Şubat 2026 | Sürüm: 2.0
+    </div>
 
 </body>
+
 </html>
